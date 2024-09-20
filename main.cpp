@@ -102,7 +102,7 @@ void RefreshBabylon(GLFWwindow *window)
 	});
 
 	Babylon::ScriptLoader loader{*g_runtime};
-	loader.LoadScript("app:///Scripts/bundle.js");
+	loader.LoadScript("app:///scripts/bundle.js");
 }
 
 static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)

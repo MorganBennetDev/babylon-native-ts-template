@@ -1,10 +1,10 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.ts",
+    entry: "./scripts/index.ts",
     // mode: "production", // Enable this when shipping for better size.
     output: {
-        path: path.resolve(__dirname, "build"),
+        path: path.resolve(__dirname, "build", "scripts"),
         filename: "bundle.js",
     },
     module: {
@@ -21,7 +21,7 @@ module.exports = {
             },
             {
                 test: /\.ts$/,
-                include: path.resolve(__dirname, 'src'),
+                include: path.resolve(__dirname, 'scripts'),
                 use: {
                     loader: "ts-loader"
                 },

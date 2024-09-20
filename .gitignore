@@ -12,3 +12,8 @@ _deps
 node_modules
 [bB]uild
 .vscode
+node_modules
+lib
+*.tsbuildinfo
+build
+build/lib

@@ -25,12 +25,12 @@ camera.position = new Vector3(0, 5, -10);
 let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
 
 // Default intensity is 1. Let's dim the light a small amount
-light.intensity = 0.7;
+light.intensity = 1;
 
 // Our built-in 'sphere' shape.
 let sphere = MeshBuilder.CreateSphere(
     "sphere",
-    { diameter: 2, segments: 32 },
+    { diameter: 5, segments: 32 },
     scene
 );
 

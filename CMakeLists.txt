@@ -1,18 +1,17 @@
 cmake_minimum_required(VERSION 3.29)
 project(BabylonTSApp VERSION 1.0.0)
 
-set(Scripts "${CMAKE_SOURCE_DIR}/typescript")
+set(Scripts "${CMAKE_SOURCE_DIR}/scripts")
 
-add_subdirectory("${Scripts}")
 add_subdirectory(Dependencies)
 
-set(SCRIPT "${Scripts}/build/bundle.js")
+set(SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/build/scripts/bundle.js")
 
 get_filename_component(SCRIPT_NAME "${SCRIPT}" NAME)
 
 add_custom_target(
     Bundle
-    COMMAND "${CMAKE_COMMAND}" -E copy "${SCRIPT}" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/${SCRIPT_NAME}"
+    COMMAND "${CMAKE_COMMAND}" -E copy "${SCRIPT}" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/scripts/${SCRIPT_NAME}"
     COMMENT "Copying ${SCRIPT_NAME}"
     DEPENDS "${SCRIPT}")
 
