@@ -8,8 +8,8 @@ import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core/Helpers/sceneHelpers";
 
 // initialize babylon scene and engine
-var engine = new NativeEngine();
-var scene = new Scene(engine);
+let engine = new NativeEngine();
+let scene = new Scene(engine);
 
 engine.runRenderLoop(function () {
     scene.render();
@@ -17,18 +17,18 @@ engine.runRenderLoop(function () {
 
 scene.createDefaultCamera(true, true, true);
 
-var camera = scene.activeCamera as ArcRotateCamera;
+let camera = scene.activeCamera as ArcRotateCamera;
 camera.setTarget(Vector3.Zero());
 camera.position = new Vector3(0, 5, -10);
 
 // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-var light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
 
 // Default intensity is 1. Let's dim the light a small amount
 light.intensity = 0.7;
 
 // Our built-in 'sphere' shape.
-var sphere = MeshBuilder.CreateSphere(
+let sphere = MeshBuilder.CreateSphere(
     "sphere",
     { diameter: 2, segments: 32 },
     scene
