@@ -1,9 +1,26 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(BabylonTSApp VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.29)
+project(BabylonTSApp VERSION 1.0.0)
 
+set(Scripts "${CMAKE_SOURCE_DIR}/typescript")
+
+add_subdirectory("${Scripts}")
 add_subdirectory(Dependencies)
 
+set(SCRIPT "${Scripts}/build/bundle.js")
+
+get_filename_component(SCRIPT_NAME "${SCRIPT}" NAME)
+
+add_custom_target(
+    Bundle
+    COMMAND "${CMAKE_COMMAND}" -E copy "${SCRIPT}" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/${SCRIPT_NAME}"
+    COMMENT "Copying ${SCRIPT_NAME}"
+    DEPENDS "${SCRIPT}")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SCRIPT})
+
 add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+
+add_dependencies(${CMAKE_PROJECT_NAME} Bundle)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE AppRuntime
@@ -19,24 +36,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE GraphicsDevice)
 
 target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE cxx_std_17)
-
-# Set bundle.js to be copied to the build folder.
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/TypeScript/build/bundle.js")
-    set(SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/TypeScript/build/bundle.js")
-    target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${SCRIPT})
-
-    get_filename_component(SCRIPT_NAME "${SCRIPT}" NAME)
-
-    add_custom_command(
-        OUTPUT "${CMAKE_CFG_INTDIR}/Scripts/${SCRIPT_NAME}"
-        COMMAND "${CMAKE_COMMAND}" -E copy "${SCRIPT}" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/Scripts/${SCRIPT_NAME}"
-        COMMENT "Copying ${SCRIPT_NAME}"
-        MAIN_DEPENDENCY "${SCRIPT}")
-    
-    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SCRIPT})
-else()
-    message(FATAL_ERROR "Javascript bundle is required. Please run 'npm run build' from the TypeScript folder.")
-endif()
 
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${CMAKE_PROJECT_NAME})
 

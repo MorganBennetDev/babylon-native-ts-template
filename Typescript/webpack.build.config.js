@@ -15,12 +15,13 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: [['@babel/preset-env', { targets: "ie 11" }]]
+                        presets: [['@babel/preset-env']]
                     },
                 },
             },
             {
                 test: /\.ts$/,
+                include: path.resolve(__dirname, 'src'),
                 use: {
                     loader: "ts-loader"
                 },
