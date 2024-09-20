@@ -12,7 +12,7 @@ var engine = new NativeEngine();
 var scene = new Scene(engine);
 
 engine.runRenderLoop(function () {
-  scene.render();
+    scene.render();
 });
 
 scene.createDefaultCamera(true, true, true);
@@ -29,9 +29,9 @@ light.intensity = 0.7;
 
 // Our built-in 'sphere' shape.
 var sphere = MeshBuilder.CreateSphere(
-  "sphere",
-  { diameter: 2, segments: 32 },
-  scene
+    "sphere",
+    { diameter: 2, segments: 32 },
+    scene
 );
 
 // Move the sphere upward 1/2 its height
